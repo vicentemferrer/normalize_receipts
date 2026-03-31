@@ -1,3 +1,11 @@
+# -*- coding: utf-8 -*-
+
+"""
+PROYECTO: APR Receipt Normalizer
+COPYRIGHT: (C) 2026 Vicente Ferrer
+LICENCIA: PROPIETARIA - TODOS LOS DERECHOS RESERVADOS
+"""
+
 import pandas as pd
 import pdfplumber
 import os
