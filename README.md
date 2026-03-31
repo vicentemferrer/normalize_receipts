@@ -34,4 +34,4 @@ El script requiere Python 3.x y las siguientes librerías:
 
 ## 📜 Licencia
 
-Copyright © 2024. Todos los derechos reservados. El uso, copia o distribución de este software está estrictamente prohibido sin autorización expresa del autor.
+Copyright © 2026. Todos los derechos reservados. El uso, copia o distribución de este software está estrictamente prohibido sin autorización expresa del autor.
