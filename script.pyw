@@ -96,22 +96,24 @@ def extract_name_from_pdf(pdf_path: str) -> Optional[str]:
     
 def extract_id_from_pdf(pdf_path: str) -> Optional[int]:
     """
-    Busca la cadena 'MEDIDOR N°:' y extrae el número subsiguiente.
+    Busca la etiqueta del medidor y extrae el número subsiguiente, 
+    tolerando espacios irregulares tanto en la etiqueta como en el ID numérico.
     """
     try:
         with pdfplumber.open(pdf_path) as pdf:
             text = pdf.pages[0].extract_text()
             
-            # Buscamos la etiqueta del medidor
-            match = re.search(r'(?:IDOR\s*N°|N?°?\s*M?e?d?idor)\s*[:\-]?\s*(\d+)', text, re.IGNORECASE)
+            match = re.search(r'(?:IDOR\s*N°|M\s*e\s*d\s*i\s*d\s*o\s*r)\s*[:\-]?\s*([\d\s]+)', text, re.IGNORECASE)
 
             if match:
-                # El grupo 1 contiene solo los dígitos encontrados después de la etiqueta
-                string: str = match.group(1).strip()
-                return int(string) if string.isdigit() else None
+                string_raw: str = match.group(1)
+                string_clean: str = re.sub(r'\s+', '', string_raw)
+                
+                return int(string_clean) if string_clean.isdigit() else None
             
             print(f"   [ADVERTENCIA] No se encontró 'MEDIDOR N°' en {os.path.basename(pdf_path)}")
             return None
+            
     except Exception as e:
         print(f"   [ERROR] Error al extraer ID del PDF {pdf_path}: {e}")
         return None
